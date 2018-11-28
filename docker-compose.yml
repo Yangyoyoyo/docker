@@ -29,7 +29,7 @@ services:
         - ./data/mariadb:/var/lib/mysql
         - ./data/mariadb/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       ports:
-        - "3306:3306"
+        - "9999:3306"
       environment:
         - MYSQL_DATABASE=ghost
         - MYSQL_USER=ghost
@@ -55,19 +55,19 @@ services:
       networks:
         - backend
 ### phpMyAdmin ###########################################
-    # phpmyadmin:
-    #   build: ./phpmyadmin
-    #   environment:
-    #     - PMA_ARBITRARY=1
-    #     - MYSQL_USER=${PMA_USER}
-    #     - MYSQL_PASSWORD=${PMA_PASSWORD}
-    #     - MYSQL_ROOT_PASSWORD=${PMA_ROOT_PASSWORD}
-    #   ports:
-    #     - "${PMA_PORT}:80"
-    #   depends_on:
-    #     - "${PMA_DB_ENGINE}"
-    #   networks:
-    #     - backend
+    phpmyadmin:
+      build: ./phpmyadmin
+      environment:
+        - PMA_ARBITRARY=1
+        - MYSQL_USER=ghost
+        - MYSQL_PASSWORD=ghost
+        - MYSQL_ROOT_PASSWORD=root
+      expose:
+        - 80
+      depends_on:
+        - mariadb
+      networks:
+        - backend
 ### Redis ################################################
     # redis:
     #   container_name: redis
