@@ -44,7 +44,7 @@ services:
       ports:
         - 80:2368
       volumes:
-        - ./data/ghost:/var/lib/ghost_data
+        - ./data/ghost:/var/lib/ghost
       environment:
         # see https://docs.ghost.org/docs/config#section-running-ghost-with-config-env-variables
         database__client: mysql
