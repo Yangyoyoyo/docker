@@ -56,7 +56,7 @@ services:
         - backend
 ### phpMyAdmin ###########################################
     phpmyadmin:
-      build: ./phpmyadmin
+      image: phpmyadmin/phpmyadmin
       environment:
         - PMA_ARBITRARY=1
         - MYSQL_USER=ghost
