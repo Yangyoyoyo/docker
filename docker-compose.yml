@@ -5,21 +5,21 @@ networks:
     driver: bridge
 services:
 ### NGINX Server #########################################
-    # nginx:
-    #   container_name: nginx
-    #   build:
-    #     context: ./nginx
-    #   volumes:
-    #     - ./data/nginx/log:/var/log/nginx
-    #     - ./nginx/sites:/etc/nginx/sites-available
-    #   ports:
-    #     - "80:80"
-    #     - "443:443"
-    #   depends_on:
-    #     - portainer
-    #     - mariadb
-    #   networks:
-    #     - backend
+    nginx:
+      container_name: nginx
+      build:
+        context: ./nginx
+      volumes:
+        - ./data/nginx/log:/var/log/nginx
+        - ./nginx/sites:/etc/nginx/sites-available
+      ports:
+        - "80:80"
+        - "443:443"
+      depends_on:
+        - portainer
+        - mariadb
+      networks:
+        - backend
 
 ### MariaDB ##############################################
     mariadb:
@@ -41,8 +41,8 @@ services:
     ghost:
       image: ghost:2.6.1-alpine
       restart: always
-      ports:
-        - 80:2368
+      expose:
+        - 2368
       volumes:
         - ./data/ghost:/var/lib/ghost
       environment:
